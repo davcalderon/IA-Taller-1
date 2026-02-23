@@ -73,8 +73,35 @@ def aStarSearch(problem: SearchProblem, heuristic=nullHeuristic):
     """
     Search the node that has the lowest combined cost and heuristic first.
     """
-    # TODO: Add your code here
-    utils.raiseNotDefined()
+        queue = utils.PriorityQueue()
+    visitados = set()
+
+    estado_inicial = problem.getStartState()
+    nodo_inicial = (estado_inicial, []) 
+    f_inicial = heuristic(estado_inicial, problem) 
+
+    queue.push(nodo_inicial, f_inicial)
+
+    while not queue.isEmpty():
+      
+      estado_actual, acciones_totales = queue.pop()
+
+      if problem.isGoalState(estado_actual):
+        return acciones_totales #acciones_actuales
+
+      if estado_actual not in visitados:
+        visitados.add(estado_actual)
+        for sucesor, accion, costo_paso in problem.getSuccessors(estado_actual):
+           
+           nuevas_acciones = acciones_totales+[accion]
+           costo_g = problem.getCostOfActions(nuevas_acciones)
+           costo_h = heuristic(sucesor, problem)
+           costo_f = costo_g + costo_h
+    
+           nuevo_nodo = (sucesor, nuevas_acciones)
+           queue.push(nuevo_nodo, costo_f)
+        
+    return []
 
 
 # Abbreviations (you can use them for the -f option in main.py)
