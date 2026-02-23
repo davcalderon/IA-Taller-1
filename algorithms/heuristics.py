@@ -16,7 +16,15 @@ def manhattanHeuristic(state, problem):
     The Manhattan distance heuristic.
     """
     # TODO: Add your code here
-    utils.raiseNotDefined()
+
+    coordenadas_actuales = state[0]
+    x1, y1 = coordenadas_actuales
+
+    x2, y2 = problem.goal
+    distancia = abs(x2-x1)+abs(y2-y1)
+
+    return distancia
+    
 
 
 def euclideanHeuristic(state, problem):
