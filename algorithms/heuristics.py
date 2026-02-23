@@ -15,24 +15,40 @@ def manhattanHeuristic(state, problem):
     """
     The Manhattan distance heuristic.
     """
-    # TODO: Add your code here
 
-    coordenadas_actuales = state[0]
-    x1, y1 = coordenadas_actuales
-
-    x2, y2 = problem.goal
-    distancia = abs(x2-x1)+abs(y2-y1)
-
-    return distancia
+    if isinstance(state[0], tuple):
+        x1, y1 = state[0]
+    else:
+        x1, y1 = state
     
+    if isinstance(problem.goal, list):
+        x2, y2 = problem.goal[0]
+    else:
+        x2, y2 = problem.goal
+        
+    
+    distancia = abs(x2 - x1) + abs(y2 - y1)
+    
+    return distancia
 
 
 def euclideanHeuristic(state, problem):
     """
     The Euclidean distance heuristic.
     """
-    # TODO: Add your code here
-    utils.raiseNotDefined()
+    if isinstance(state[0], tuple):
+        x1, y1 = state[0]
+    else:
+        x1, y1 = state
+    
+    if isinstance(problem.goal, list):
+        x2, y2 = problem.goal[0]
+    else:
+        x2, y2 = problem.goal
+        
+    distancia = ((x2-x1)**2+abs(y2-y1)**2)**0.5
+
+    return distancia
 
 
 def survivorHeuristic(state: Tuple[Tuple, Any], problem: MultiSurvivorProblem):
